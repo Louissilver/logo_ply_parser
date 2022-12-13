@@ -245,7 +245,7 @@ def p_procedure_definition(p):
     procedure_definition : TO ID parameter_list statement_list END
     '''
     args = [a for a in p[3] if a is not None]
-    p[0] = ['DEF ' + p[2], args, p[4]]
+    p[0] = [args, p[4], 'DEF ' + p[2]]
     symbol_table[p[2]] = {
         'args': [a for a in args if a is not None],
         'body': p[4]
@@ -277,7 +277,7 @@ def p_procedure_call(p):
     procedure_call : ID expression_list
     '''
     args = [a for a in p[2] if a is not None]
-    p[0] = ['CALL ' + p[1], args]
+    p[0] = [args, 'CALL ' + p[1]]
     program.extend(p[0])
 
 
